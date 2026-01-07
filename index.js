@@ -2167,7 +2167,7 @@ async function handleRequest(request) {
         numPitch >= 0 ? `+${numPitch}Hz` : `${numPitch}Hz`,
         numVolume >= 0 ? `+${numVolume}%` : `${numVolume}%`,
         style,
-        "audio-16khz-32kbitrate-mono-mp3"
+        "raw-16khz-16bit-mono-pcm"
       );
       return response;
     } catch (error) {
@@ -2265,7 +2265,7 @@ async function processBatchedAudioChunks(chunks, voiceName, rate, pitch, volume,
   return audioChunks;
 }
 __name(processBatchedAudioChunks, "processBatchedAudioChunks");
-async function getVoice(text, voiceName = "zh-CN-XiaoxiaoNeural", rate = "+0%", pitch = "+0Hz", volume = "+0%", style = "general", outputFormat = "audio-16khz-32kbitrate-mono-mp3") {
+async function getVoice(text, voiceName = "zh-CN-XiaoxiaoNeural", rate = "+0%", pitch = "+0Hz", volume = "+0%", style = "general", outputFormat = "raw-16khz-16bit-mono-pcm") {
   try {
     const cleanText = text.trim();
     if (!cleanText) {
@@ -2324,7 +2324,7 @@ async function getVoice(text, voiceName = "zh-CN-XiaoxiaoNeural", rate = "+0%", 
   }
 }
 __name(getVoice, "getVoice");
-async function getAudioChunk(text, voiceName, rate, pitch, volume, style, outputFormat = "audio-16khz-32kbitrate-mono-mp3", maxRetries = 3) {
+async function getAudioChunk(text, voiceName, rate, pitch, volume, style, outputFormat = "raw-16khz-16bit-mono-pcm", maxRetries = 3) {
   const retryDelay = 500;
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
     try {
@@ -2607,7 +2607,7 @@ async function handleFileUpload(request) {
       numPitch >= 0 ? `+${numPitch}Hz` : `${numPitch}Hz`,
       numVolume >= 0 ? `+${numVolume}%` : `${numVolume}%`,
       style,
-      "audio-16khz-32kbitrate-mono-mp3"
+      "raw-16khz-16bit-mono-pcm"
     );
   } catch (error) {
     console.error("\u6587\u4EF6\u4E0A\u4F20\u5904\u7406\u5931\u8D25:", error);

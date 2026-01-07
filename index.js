@@ -1054,7 +1054,7 @@ var HTML_PAGE = `
                         <div class="form-group">
                             <label class="form-label" for="voice">\u8BED\u97F3\u9009\u62E9</label>
                             <select class="form-select" id="voice">
-                                <option value="zh-CN-XiaoxiaoNeural">\u6653\u6653 (\u5973\u58F0\xB7\u6E29\u67D4)</option>
+                                <option value="zh-CN-XiaoyouNeural">\u6653\u6653 (\u5973\u58F0\xB7\u6E29\u67D4)</option>
                                 <option value="zh-CN-YunxiNeural">\u4E91\u5E0C (\u7537\u58F0\xB7\u6E05\u6717)</option>
                                 <option value="zh-CN-YunyangNeural">\u4E91\u626C (\u7537\u58F0\xB7\u9633\u5149)</option>
                                 <option value="zh-CN-XiaoyiNeural">\u6653\u4F0A (\u5973\u58F0\xB7\u751C\u7F8E)</option>
@@ -2151,7 +2151,7 @@ async function handleRequest(request) {
       const requestBody = await request.json();
       const {
         input,
-        voice = "zh-CN-XiaoxiaoNeural",
+        voice = "zh-CN-XiaoyouNeural",
         speed = "1.0",
         volume = "0",
         pitch = "0",
@@ -2265,7 +2265,7 @@ async function processBatchedAudioChunks(chunks, voiceName, rate, pitch, volume,
   return audioChunks;
 }
 __name(processBatchedAudioChunks, "processBatchedAudioChunks");
-async function getVoice(text, voiceName = "zh-CN-XiaoxiaoNeural", rate = "+0%", pitch = "+0Hz", volume = "+0%", style = "general", outputFormat = "raw-16khz-16bit-mono-pcm") {
+async function getVoice(text, voiceName = "zh-CN-XiaoyouNeural", rate = "+0%", pitch = "+0Hz", volume = "+0%", style = "general", outputFormat = "raw-16khz-16bit-mono-pcm") {
   try {
     const cleanText = text.trim();
     if (!cleanText) {
@@ -2294,9 +2294,7 @@ async function getVoice(text, voiceName = "zh-CN-XiaoxiaoNeural", rate = "+0%", 
       style,
       outputFormat,
       3,
-      // 每批处理3个
       800
-      // 批次间延迟800ms
     );
     const concatenatedAudio = new Blob(audioChunks, { type: "audio/mpeg" });
     return new Response(concatenatedAudio, {
@@ -2511,7 +2509,7 @@ async function handleFileUpload(request) {
   try {
     const formData = await request.formData();
     const file = formData.get("file");
-    const voice = formData.get("voice") || "zh-CN-XiaoxiaoNeural";
+    const voice = formData.get("voice") || "zh-CN-XiaoyouNeural";
     const speed = formData.get("speed") || "1.0";
     const volume = formData.get("volume") || "0";
     const pitch = formData.get("pitch") || "0";
